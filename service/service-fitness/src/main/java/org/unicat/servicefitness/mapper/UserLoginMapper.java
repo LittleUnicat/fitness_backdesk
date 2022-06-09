@@ -1,6 +1,6 @@
 package org.unicat.servicefitness.mapper;
 
-import org.unicat.servicefitness.entity.UserLogin;
+import org.unicat.servicefitness.entity.UserInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author unicat
  * @since 2022-06-09
  */
-public interface UserLoginMapper extends BaseMapper<UserLogin> {
+public interface UserLoginMapper extends BaseMapper<UserInfo> {
 
 }
