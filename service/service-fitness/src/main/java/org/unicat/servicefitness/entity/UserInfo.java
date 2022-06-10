@@ -35,6 +35,9 @@ public class UserInfo implements Serializable {
 
     @ApiModelProperty(value = "密码")
     private String password;
+    
+    @ApiModelProperty(value = "头像")
+    private String avatar;
 
     @ApiModelProperty(value = "角色")
     private String role;

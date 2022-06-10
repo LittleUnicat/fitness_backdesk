@@ -13,7 +13,7 @@ import org.unicat.servicefitness.entity.vo.UserVo;
  * @author unicat
  * @since 2022-06-09
  */
-public interface UserLoginService extends IService<UserInfo> {
+public interface UserInfoService extends IService<UserInfo> {
     @Transactional
     String addUser(UserVo userVo);
 

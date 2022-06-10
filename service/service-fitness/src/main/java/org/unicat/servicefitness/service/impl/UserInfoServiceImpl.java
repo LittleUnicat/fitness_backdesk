@@ -7,12 +7,10 @@ import org.unicat.commonutils.ResultCode;
 import org.unicat.servicebase.exceptionHandler.MyException;
 import org.unicat.servicefitness.entity.UserInfo;
 import org.unicat.servicefitness.entity.vo.UserVo;
-import org.unicat.servicefitness.mapper.UserLoginMapper;
-import org.unicat.servicefitness.service.UserLoginService;
+import org.unicat.servicefitness.mapper.UserInfoMapper;
+import org.unicat.servicefitness.service.UserInfoService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
-
-import java.nio.file.CopyOption;
 
 /**
  * <p>
@@ -23,7 +21,7 @@ import java.nio.file.CopyOption;
  * @since 2022-06-09
  */
 @Service
-public class UserLoginServiceImpl extends ServiceImpl<UserLoginMapper, UserInfo> implements UserLoginService {
+public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> implements UserInfoService {
 
     @Override
     public String addUser(UserVo userVo) {

@@ -1,5 +1,6 @@
 package org.unicat.servicefitness.service;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.unicat.servicefitness.entity.UserProject;
 import com.baomidou.mybatisplus.extension.service.IService;
 

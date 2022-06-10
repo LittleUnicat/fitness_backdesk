@@ -1,16 +1,19 @@
 package org.unicat.servicefitness.service;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.unicat.servicefitness.entity.FitnessProject;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.unicat.servicefitness.entity.UserProject;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author unicat
  * @since 2022-06-09
  */
 public interface FitnessProjectService extends IService<FitnessProject> {
-
+    @Transactional
+    Boolean updateProject(FitnessProject fitnessProject);
 }
