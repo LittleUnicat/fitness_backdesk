@@ -4,6 +4,7 @@ package org.unicat.servicefitness.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import org.unicat.commonutils.R;
@@ -11,6 +12,7 @@ import org.unicat.servicefitness.entity.UserInfo;
 import org.unicat.servicefitness.entity.vo.UserVo;
 import org.unicat.servicefitness.service.UserInfoService;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -69,8 +71,8 @@ public class UserInfoController {
 
 
     @ApiOperation(value = "注销用户")
-    @DeleteMapping("/user/{uid}")
-    public R removeUser(@PathVariable String uid) {
+    @DeleteMapping("/user")
+    public R removeUser(@RequestParam String uid) {
         if (userInfoService.removeById(uid)) {
             return R.ok()
                     .message("用户已注销");

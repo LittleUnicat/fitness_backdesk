@@ -23,9 +23,9 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value = "FitnessProject对象", description = "")
+@ApiModel(value = "FitnessProject对象", description = "健身项目实体类")
 public class FitnessProject implements Serializable {
-
+    
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "项目id")

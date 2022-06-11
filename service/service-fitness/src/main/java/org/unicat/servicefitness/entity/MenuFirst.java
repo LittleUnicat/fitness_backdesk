@@ -1,7 +1,10 @@
 package org.unicat.servicefitness.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
@@ -25,7 +28,7 @@ public class MenuFirst implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "一级菜单号")
-      @TableId(value = "id", type = IdType.ID_WORKER_STR)
+      @TableId(value = "id", type = IdType.ASSIGN_ID)
     private String id;
 
     @ApiModelProperty(value = "一级菜单名称")
@@ -35,9 +38,11 @@ public class MenuFirst implements Serializable {
     private Integer sort;
 
     @ApiModelProperty(value = "创建时间")
+    @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;
 
     @ApiModelProperty(value = "更新时间")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date gmtModified;
 
 

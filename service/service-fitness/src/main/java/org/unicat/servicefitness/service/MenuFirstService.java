@@ -2,6 +2,9 @@ package org.unicat.servicefitness.service;
 
 import org.unicat.servicefitness.entity.MenuFirst;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.unicat.servicefitness.entity.vo.MenuVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +15,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2022-06-09
  */
 public interface MenuFirstService extends IService<MenuFirst> {
-
+    
+//    List<OneMenu> getOneMenu();
+    
+    List<MenuVo> getAllMenu();
+    
 }
