@@ -14,6 +14,7 @@ import org.unicat.servicebase.exceptionHandler.MyException;
 import org.unicat.servicefitness.entity.FitnessDescription;
 import org.unicat.servicefitness.entity.FitnessProject;
 import org.unicat.servicefitness.entity.vo.MenuVo;
+import org.unicat.servicefitness.entity.vo.ProjectPublishVo;
 import org.unicat.servicefitness.entity.vo.ProjectQuery;
 import org.unicat.servicefitness.entity.vo.ProjectVo;
 import org.unicat.servicefitness.service.FitnessDescriptionService;
@@ -127,5 +128,23 @@ public class FitnessProjectController {
     }
 
 
+    @ApiOperation(value = "项目发布信息获取")
+    @GetMapping("/getPublishProjectInfo/{projectId}")
+    public R getPublishCourseInfo(@PathVariable String projectId) {
+        ProjectPublishVo projectPublishInfo = projectService.getPublishProjectInfo(projectId);
+        return R.ok()
+                .data("projectPublishInfo", projectPublishInfo);
+    }
+
+//    @ApiOperation(value = "项目最终发布")
+//    @PutMapping("/publishCourse/{courseId}")
+//    public R publishCourse(@PathVariable String courseId) {
+//        EduCourse course = new EduCourse();
+//        course.setId(courseId);
+//        course.setStatus("Normal");
+//        // 只有不为空的才更新，不为空保持原始值
+//        courseService.updateById(course);
+//        return R.ok();
+//    }
 }
 

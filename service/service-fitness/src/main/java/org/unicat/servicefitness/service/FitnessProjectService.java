@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.transaction.annotation.Transactional;
 import org.unicat.servicefitness.entity.FitnessProject;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.unicat.servicefitness.entity.vo.ProjectPublishVo;
 import org.unicat.servicefitness.entity.vo.ProjectQuery;
 import org.unicat.servicefitness.entity.vo.ProjectVo;
 
@@ -29,4 +30,6 @@ public interface FitnessProjectService extends IService<FitnessProject> {
     void pageQuery(Page<FitnessProject> pageParam, ProjectQuery projectQuery);
 
     Boolean addProject(ProjectVo projectVo);
+
+    ProjectPublishVo getPublishProjectInfo(String projectId);
 }

@@ -11,6 +11,7 @@ import org.unicat.commonutils.ResultCode;
 import org.unicat.servicebase.exceptionHandler.MyException;
 import org.unicat.servicefitness.entity.FitnessDescription;
 import org.unicat.servicefitness.entity.FitnessProject;
+import org.unicat.servicefitness.entity.vo.ProjectPublishVo;
 import org.unicat.servicefitness.entity.vo.ProjectQuery;
 import org.unicat.servicefitness.entity.vo.ProjectVo;
 import org.unicat.servicefitness.mapper.FitnessProjectMapper;
@@ -147,6 +148,16 @@ public class FitnessProjectServiceImpl extends ServiceImpl<FitnessProjectMapper,
             return false;
         }
 
+    }
+
+    @Override
+    public ProjectPublishVo getPublishProjectInfo(String projectId) {
+
+        ProjectPublishVo projectPublishVo = new ProjectPublishVo();
+        ProjectVo projectVo = this.getProjectVo(projectId);
+        BeanUtil.copyProperties(projectVo,projectPublishVo);
+        
+        return projectPublishVo;
     }
 
 
