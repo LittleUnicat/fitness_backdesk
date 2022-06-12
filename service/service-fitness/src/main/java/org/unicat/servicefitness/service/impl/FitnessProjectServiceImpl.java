@@ -75,7 +75,8 @@ public class FitnessProjectServiceImpl extends ServiceImpl<FitnessProjectMapper,
         fitnessDescriptionService.list()
                 .stream()
                 .filter(des -> des.getId().equals(id))
-                .findFirst().ifPresent(fitnessDescription -> projectVo.setDescription(fitnessDescription.getDescription()));
+                .findFirst()
+                .ifPresent(fitnessDescription -> projectVo.setDescription(fitnessDescription.getDescription()));
 
         return projectVo;
     }
