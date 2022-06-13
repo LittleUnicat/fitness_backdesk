@@ -20,8 +20,10 @@ import org.unicat.servicefitness.entity.vo.ProjectVo;
 import org.unicat.servicefitness.service.FitnessDescriptionService;
 import org.unicat.servicefitness.service.FitnessProjectService;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * <p>
@@ -59,10 +61,20 @@ public class FitnessProjectController {
 
         ProjectVo projectVo = projectService.getProjectVo(pid);
 
-        ColorLogInfo.colorLog("", ColorLogInfo.YELLOW, 1, "查询某一项目");
-
         return R.ok()
                 .data("project", projectVo);
+    }
+    
+    @GetMapping("/price")
+    public R getAllPrice(){
+        Stream<BigDecimal> priceList = projectService.list()
+                .stream()
+                .map(FitnessProject::getPrice)
+                .distinct()
+                .sorted();
+        
+        return R.ok()
+                .data("priceList", priceList);
     }
 
 
@@ -92,9 +104,9 @@ public class FitnessProjectController {
 
 
     @ApiOperation(value = "删除项目")
-    @DeleteMapping("/")
-    public R deleteProject(@RequestParam String pid) {
-        if (projectService.removeById(pid)) {
+    @DeleteMapping("/{projectId}")
+    public R deleteProject(@PathVariable String projectId) {
+        if (projectService.removeById(projectId)) {
             return R.ok()
                     .message("删除项目成功");
         }
@@ -136,15 +148,15 @@ public class FitnessProjectController {
                 .data("projectPublishInfo", projectPublishInfo);
     }
 
-//    @ApiOperation(value = "项目最终发布")
-//    @PutMapping("/publishCourse/{courseId}")
-//    public R publishCourse(@PathVariable String courseId) {
-//        EduCourse course = new EduCourse();
-//        course.setId(courseId);
-//        course.setStatus("Normal");
-//        // 只有不为空的才更新，不为空保持原始值
-//        courseService.updateById(course);
-//        return R.ok();
-//    }
+    @ApiOperation(value = "项目最终发布")
+    @PutMapping("/publishProject/{projectId}")
+    public R publishCourse(@PathVariable String projectId) {
+        FitnessProject project = new FitnessProject();
+        project.setId(projectId);
+        project.setStatus("Normal");
+        // 只有不为空的才更新，不为空保持原始值
+        projectService.updateById(project);
+        return R.ok();
+    }
 }
 

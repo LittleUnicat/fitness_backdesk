@@ -17,5 +17,7 @@ public class ProjectPublishVo implements Serializable {
     private String description;
     private String menuFirstId;
     private String menuSecondId;
+    private String menuFirstTitle;
+    private String menuSecondTitle;
     private String price;
 }

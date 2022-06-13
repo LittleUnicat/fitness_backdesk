@@ -1,17 +1,23 @@
 package org.unicat.servicefitness.service.impl;
 
+import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.multipart.MultipartFile;
 import org.unicat.servicefitness.entity.MenuFirst;
 import org.unicat.servicefitness.entity.MenuSecond;
 import org.unicat.servicefitness.entity.vo.MenuVo;
+import org.unicat.servicefitness.excel.ExcelMenuData;
+import org.unicat.servicefitness.listener.ExcelMenuListener;
 import org.unicat.servicefitness.mapper.MenuFirstMapper;
 import org.unicat.servicefitness.service.MenuFirstService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import org.unicat.servicefitness.service.MenuSecondService;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +34,22 @@ public class MenuFirstServiceImpl extends ServiceImpl<MenuFirstMapper, MenuFirst
 
     @Autowired
     MenuSecondService menuSecondService;
+
+
+    @Override
+    public void saveMenu(MultipartFile file) throws IOException {
+        InputStream in = file.getInputStream();
+        EasyExcel.read(in, ExcelMenuData.class, new ExcelMenuListener(this, menuSecondService))
+                .sheet()
+                .doRead();
+    }
+    
+
+    @Override
+    public MenuFirst existMenuFirst(String title) {
+        return this.getOne(new QueryWrapper<MenuFirst>().eq("title", title));
+    }
+
 
     @Override
     public List<MenuVo> getAllMenu() {

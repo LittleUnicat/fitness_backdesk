@@ -6,5 +6,5 @@ import org.unicat.commonutils.R;
 public interface OssService {
     R uploadHeadImg(MultipartFile file);
 
-    R uploadCourseCover(MultipartFile file);
+    R uploadProjectCover(MultipartFile file);
 }

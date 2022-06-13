@@ -5,12 +5,15 @@ import cn.hutool.core.bean.copier.CopyOptions;
 import com.alibaba.excel.util.StringUtils;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.sun.xml.bind.v2.TODO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.unicat.commonutils.ResultCode;
 import org.unicat.servicebase.exceptionHandler.MyException;
 import org.unicat.servicefitness.entity.FitnessDescription;
 import org.unicat.servicefitness.entity.FitnessProject;
+import org.unicat.servicefitness.entity.MenuFirst;
+import org.unicat.servicefitness.entity.MenuSecond;
 import org.unicat.servicefitness.entity.vo.ProjectPublishVo;
 import org.unicat.servicefitness.entity.vo.ProjectQuery;
 import org.unicat.servicefitness.entity.vo.ProjectVo;
@@ -19,6 +22,8 @@ import org.unicat.servicefitness.service.FitnessDescriptionService;
 import org.unicat.servicefitness.service.FitnessProjectService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import org.unicat.servicefitness.service.MenuFirstService;
+import org.unicat.servicefitness.service.MenuSecondService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +41,12 @@ public class FitnessProjectServiceImpl extends ServiceImpl<FitnessProjectMapper,
 
     @Autowired
     FitnessDescriptionService fitnessDescriptionService;
+
+    @Autowired
+    MenuFirstService menuFirstService;
+
+    @Autowired
+    MenuSecondService menuSecondService;
 
     @Override
     public List<ProjectVo> getAllProjectVo() {
@@ -155,10 +166,24 @@ public class FitnessProjectServiceImpl extends ServiceImpl<FitnessProjectMapper,
 
         ProjectPublishVo projectPublishVo = new ProjectPublishVo();
         ProjectVo projectVo = this.getProjectVo(projectId);
-        BeanUtil.copyProperties(projectVo,projectPublishVo);
-        
+        BeanUtil.copyProperties(projectVo, projectPublishVo);
+        projectPublishVo.setMenuFirstTitle(
+                menuFirstService.getById(projectVo.getMenuFirstId()).getTitle());
+        projectPublishVo.setMenuSecondTitle(
+                menuSecondService.getById(projectPublishVo.getMenuSecondId()).getTitle());
+
         return projectPublishVo;
     }
 
-
+    @Override
+    public Boolean deleteProject(String projectId) {
+        try {
+            // fitnessDescriptionService.removeById(projectId);
+            this.removeById(projectId);
+            // TODO 删除项目的时候用户已经选择的也要删除？但记录不应该删除
+            return true;
+        } catch (Exception e) {
+            throw new MyException(ResultCode.ERROR, "服务器内部错误");
+        }
+    }
 }

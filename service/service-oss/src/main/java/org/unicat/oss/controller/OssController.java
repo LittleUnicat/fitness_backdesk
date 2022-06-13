@@ -12,7 +12,7 @@ import org.unicat.oss.service.OssService;
 
 
 @RestController
-@RequestMapping("/eduoss/fileoss")
+@RequestMapping("/fitnessOss")
 @Api(tags = "阿里云oss文件上传")
 @CrossOrigin
 public class OssController {
@@ -41,11 +41,11 @@ public class OssController {
 
 
     @ApiOperation(value = "文件上传")
-    @PostMapping("/course/uploadCover")
+    @PostMapping("/project/uploadCover")
     public R upload(
             @ApiParam(name = "file", value = "文件", required = true)
             @RequestParam("file") MultipartFile file){
-        R uploadResult = ossService.uploadCourseCover(file);
+        R uploadResult = ossService.uploadProjectCover(file);
         //返回r对象
         // 若返回正确代码
         if(R.ok().getCode().equals(uploadResult.getCode())){
@@ -60,7 +60,7 @@ public class OssController {
 
 
     @ApiOperation("下载课程导入模板")
-    @GetMapping("/subjectTemplate")
+    @GetMapping("/menuTemplate")
     public R getSubjectTemplate(){
         return R.ok()
                 .data("url", "https://unicat.oss-cn-beijing.aliyuncs.com/subjectTemplate/testSubject.xlsx");

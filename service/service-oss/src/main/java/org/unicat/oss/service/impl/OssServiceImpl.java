@@ -90,7 +90,7 @@ public class OssServiceImpl implements OssService {
     }
 
     @Override
-    public R uploadCourseCover(MultipartFile file) {
+    public R uploadProjectCover(MultipartFile file) {
         String endpoint = ConstantPropertiesUtil.END_POINT;
         String accessKeyId = ConstantPropertiesUtil.KEY_ID;
         String accessKeySecret = ConstantPropertiesUtil.KEY_SECRET;
@@ -111,7 +111,7 @@ public class OssServiceImpl implements OssService {
             String uuid = UUID.randomUUID().toString().replaceAll("-", "");
             filename = uuid + filename;
 
-            filename = "course/cover/" + filename;
+            filename = "project/cover/" + filename;
 
 
             // 创建PutObject请求。

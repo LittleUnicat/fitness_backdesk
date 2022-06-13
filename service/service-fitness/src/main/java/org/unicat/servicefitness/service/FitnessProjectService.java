@@ -32,4 +32,6 @@ public interface FitnessProjectService extends IService<FitnessProject> {
     Boolean addProject(ProjectVo projectVo);
 
     ProjectPublishVo getPublishProjectInfo(String projectId);
+    
+    Boolean deleteProject(String projectId);
 }

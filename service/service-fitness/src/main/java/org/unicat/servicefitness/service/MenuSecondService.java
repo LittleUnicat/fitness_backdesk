@@ -12,5 +12,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2022-06-09
  */
 public interface MenuSecondService extends IService<MenuSecond> {
-
+    MenuSecond existMenuSecond(String title, String menuFirstId);
 }

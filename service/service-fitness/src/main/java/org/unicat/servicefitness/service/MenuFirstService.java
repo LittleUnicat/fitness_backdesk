@@ -1,9 +1,13 @@
 package org.unicat.servicefitness.service;
 
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import org.unicat.servicefitness.entity.MenuFirst;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.unicat.servicefitness.entity.vo.MenuVo;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -20,4 +24,8 @@ public interface MenuFirstService extends IService<MenuFirst> {
     
     List<MenuVo> getAllMenu();
     
+    void saveMenu(MultipartFile file) throws IOException;
+
+    MenuFirst existMenuFirst(String title);
+
 }
