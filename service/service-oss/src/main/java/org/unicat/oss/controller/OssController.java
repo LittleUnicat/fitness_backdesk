@@ -63,7 +63,7 @@ public class OssController {
     @GetMapping("/menuTemplate")
     public R getSubjectTemplate(){
         return R.ok()
-                .data("url", "https://unicat.oss-cn-beijing.aliyuncs.com/subjectTemplate/testSubject.xlsx");
+                .data("url", "https://unicat.oss-cn-beijing.aliyuncs.com/fitness/template/testMenu.xlsx");
     }
 
 

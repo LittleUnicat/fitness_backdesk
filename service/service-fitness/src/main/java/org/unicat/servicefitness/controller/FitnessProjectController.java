@@ -64,15 +64,15 @@ public class FitnessProjectController {
         return R.ok()
                 .data("project", projectVo);
     }
-    
+
     @GetMapping("/price")
-    public R getAllPrice(){
+    public R getAllPrice() {
         Stream<BigDecimal> priceList = projectService.list()
                 .stream()
                 .map(FitnessProject::getPrice)
                 .distinct()
                 .sorted();
-        
+
         return R.ok()
                 .data("priceList", priceList);
     }
@@ -81,13 +81,12 @@ public class FitnessProjectController {
     @ApiOperation(value = "添加项目")
     @PostMapping("/")
     public R addProject(@RequestBody ProjectVo projectVo) {
-        if (projectService.addProject(projectVo)) {
-            return R.ok()
-                    .message("添加项目成功");
-        } else {
-            return R.error()
-                    .message("添加项目失败");
-        }
+
+        String projectId = projectService.addProject(projectVo);
+        ColorLogInfo.colorLog("", ColorLogInfo.RED, 1, "添加项目成功" + projectId);
+        return R.ok()
+                .message("添加项目成功")
+                .data("projectId", projectId);
     }
 
 

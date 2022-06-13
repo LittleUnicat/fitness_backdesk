@@ -29,7 +29,7 @@ public interface FitnessProjectService extends IService<FitnessProject> {
 
     void pageQuery(Page<FitnessProject> pageParam, ProjectQuery projectQuery);
 
-    Boolean addProject(ProjectVo projectVo);
+    String addProject(ProjectVo projectVo);
 
     ProjectPublishVo getPublishProjectInfo(String projectId);
     

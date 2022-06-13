@@ -142,7 +142,7 @@ public class FitnessProjectServiceImpl extends ServiceImpl<FitnessProjectMapper,
     }
 
     @Override
-    public Boolean addProject(ProjectVo projectVo) {
+    public String addProject(ProjectVo projectVo) {
 
         try {
             FitnessProject fitnessProject = new FitnessProject();
@@ -154,9 +154,9 @@ public class FitnessProjectServiceImpl extends ServiceImpl<FitnessProjectMapper,
             fitnessDescription.setId(fitnessProject.getId());
             fitnessDescriptionService.save(fitnessDescription);
 
-            return true;
+            return fitnessProject.getId();
         } catch (Exception e) {
-            return false;
+            throw new MyException(ResultCode.ERROR, "添加项目失败");
         }
 
     }
