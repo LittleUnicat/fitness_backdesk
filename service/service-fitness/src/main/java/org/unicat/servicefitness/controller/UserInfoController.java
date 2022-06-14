@@ -42,9 +42,9 @@ public class UserInfoController {
     }
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/userInfo/{id}")
     @ApiOperation(value = "根据ID查找用户")
-    public R findTeacherById(@ApiParam(name = "id", value = "用户ID", required = true)
+    public R findUserById(@ApiParam(name = "id", value = "用户ID", required = true)
                              @PathVariable("id") String id) {
         QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("id", id);
@@ -53,7 +53,7 @@ public class UserInfoController {
             UserInfo userInfo = userInfoService.getById(id);
             if (userInfo != null) {
                 return R.ok()
-                        .data("userInfo", userInfo);
+                        .data("user", userInfo);
             } else {
                 return R.error()
                         .message("用户不存在");
@@ -65,7 +65,7 @@ public class UserInfoController {
     }
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("userInfo/{id}")
     @ApiOperation(value = "按ID逻辑删除用户")
     public R deleteTeacher(@ApiParam(name = "id", value = "用户ID", required = true)
                            @PathVariable("id") String id) {
@@ -140,22 +140,22 @@ public class UserInfoController {
     }
 
 
-    @PostMapping("/")
+    @PostMapping("/userInfo")
     @ApiOperation(value = "添加用户信息")
-    public R addTeacher(@ApiParam(name = "teacher", value = "用户信息", required = true)
-                        @RequestBody UserInfo teacher) {
+    public R addTeacher(@ApiParam(name = "user", value = "用户信息", required = true)
+                        @RequestBody UserInfo userInfo) {
 
-        boolean flag = userInfoService.save(teacher);
+        boolean flag = userInfoService.save(userInfo);
         return flag ? R.ok() : R.error();
     }
 
 
-    @PutMapping("/")
+    @PutMapping("/userInfo")
     @ApiOperation(value = "修改用户信息")
-    public R updateTeacher(@ApiParam(name = "teacher", value = "用户信息", required = true)
-                           @RequestBody UserInfo teacher) {
+    public R updateUser(@ApiParam(name = "user", value = "用户信息", required = true)
+                           @RequestBody UserInfo userInfo) {
 
-        if (userInfoService.updateById(teacher)) {
+        if (userInfoService.updateById(userInfo)) {
             return R.ok()
                     .message("更新成功");
         } else {

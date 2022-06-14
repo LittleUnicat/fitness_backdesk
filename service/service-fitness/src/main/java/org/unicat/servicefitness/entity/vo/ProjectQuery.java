@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @ApiModel(value = "Project查询对象", description = "项目查询对象封装")

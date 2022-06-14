@@ -10,7 +10,7 @@
         <module>common</module>
         <module>common/common_utils</module>
         <module>common/easy_excel</module>
-        <module>common/common_utils/service_base</module>
+        <module>common/service_base</module>
         <module>service</module>
     </modules>
     <name>fitness_backdesk</name>

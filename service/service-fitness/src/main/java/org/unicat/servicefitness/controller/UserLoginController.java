@@ -64,7 +64,7 @@ public class UserLoginController {
 
         }
         return R.error()
-                .message("登录失败");
+                .message("登录失败，用户不存在");
     }
 
 
@@ -79,7 +79,7 @@ public class UserLoginController {
                     .data("avatar", userInfo.getAvatar());
         }
         return R.error()
-                .message("登录失败，用户不存在");
+                .message("用户不存在");
     }
 
     @ApiOperation(value = "用户退出登录")
