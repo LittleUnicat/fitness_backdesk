@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,9 @@ import org.unicat.servicefitness.entity.UserInfo;
 import org.unicat.servicefitness.entity.vo.UserQuery;
 import org.unicat.servicefitness.service.UserInfoService;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * <p>
@@ -41,11 +44,28 @@ public class UserInfoController {
         return R.ok().data("items", list);
     }
 
+    @GetMapping("/getRandom4User/{num}")
+    @ApiOperation(value = "随机4个用户")
+    public R getRandom4User(@PathVariable String num) {
+        List<UserInfo> userInfos = userInfoService.list();
+        List<UserInfo> list = new ArrayList<>();
+
+        // 随机过程
+        Random random = new Random();
+        for (int i = 1; i <= Integer.parseInt(num); i++) {
+            int nextInt = random.nextInt(userInfos.size());
+            list.add(userInfos.get(nextInt));
+            userInfos.remove(userInfos.get(nextInt));
+        }
+
+        return R.ok().data("items", list);
+    }
+
 
     @GetMapping("/userInfo/{id}")
     @ApiOperation(value = "根据ID查找用户")
     public R findUserById(@ApiParam(name = "id", value = "用户ID", required = true)
-                             @PathVariable("id") String id) {
+                          @PathVariable("id") String id) {
         QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("id", id);
 
@@ -153,7 +173,7 @@ public class UserInfoController {
     @PutMapping("/userInfo")
     @ApiOperation(value = "修改用户信息")
     public R updateUser(@ApiParam(name = "user", value = "用户信息", required = true)
-                           @RequestBody UserInfo userInfo) {
+                        @RequestBody UserInfo userInfo) {
 
         if (userInfoService.updateById(userInfo)) {
             return R.ok()
